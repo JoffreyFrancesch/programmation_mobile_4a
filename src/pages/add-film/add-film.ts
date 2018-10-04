@@ -9,7 +9,8 @@ import {
 import {
   Item
 } from "../../models/item/item.model";
-import { FilmListService } from '../../services/film-list/film-list.service';
+
+import { AngularFireDatabase } from "@angular/fire/database";
 /**
  * Generated class for the AddFilmPage page.
  *
@@ -19,50 +20,55 @@ import { FilmListService } from '../../services/film-list/film-list.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-add-film',
-  templateUrl: 'add-film.html',
+  selector: "page-add-film",
+  templateUrl: "add-film.html"
 })
 export class AddFilmPage {
-
   item: Item = {
-    name: '',
-    description: '',
+    name: "",
+    description: "",
     year: undefined,
-    type: '',
-    producer: '',
-  }
+    type: "",
+    producer: ""
+  };
 
-  types = [{
-    value: "action",
-    text: "Action"
-  }, {
-    value: "drame",
-    text: "Drame"
-  }, {
-    value: "comedie",
-    text: "Comedie"
-  }, {
-    value: "romance",
-    text : "Romance"
-  }, {
-    value: "animation",
-    text : "Animation"
-  }, {
-    value: "fantastique",
-    text : "Fantastique"
-  }]
+  types = [
+    {
+      value: "action",
+      text: "Action"
+    },
+    {
+      value: "drame",
+      text: "Drame"
+    },
+    {
+      value: "comedie",
+      text: "Comedie"
+    },
+    {
+      value: "romance",
+      text: "Romance"
+    },
+    {
+      value: "animation",
+      text: "Animation"
+    },
+    {
+      value: "fantastique",
+      text: "Fantastique"
+    }
+  ];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private films : FilmListService) {}
+
+  constructor( public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddFilmPage');
+    console.log("ionViewDidLoad AddFilmPage");
   }
 
-  addItem(item : Item){
-    this.films.addItem(item).then(ref => {
-      console.log(ref.key)
-    })
+  addItem(item: Item) {
+    // afDB: AngularFireDatabase;
+    // afDB.list('/film-list').push(item);
   }
-
 }
