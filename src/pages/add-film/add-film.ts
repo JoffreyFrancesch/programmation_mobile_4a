@@ -11,12 +11,6 @@ import {
 } from "../../models/item/item.model";
 
 import { AngularFireDatabase } from "@angular/fire/database";
-/**
- * Generated class for the AddFilmPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -24,10 +18,11 @@ import { AngularFireDatabase } from "@angular/fire/database";
   templateUrl: "add-film.html"
 })
 export class AddFilmPage {
+  
   item: Item = {
     name: "",
     description: "",
-    year: undefined,
+    year: null,
     type: "",
     producer: ""
   };
@@ -59,16 +54,17 @@ export class AddFilmPage {
     }
   ];
 
+  
 
-
-  constructor( public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase) {
+  }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad AddFilmPage");
   }
 
   addItem(item: Item) {
-    // afDB: AngularFireDatabase;
-    // afDB.list('/film-list').push(item);
+    this.afDB.list("/film-list").push(item);
+    console.log("Item", item + " push");
   }
 }
