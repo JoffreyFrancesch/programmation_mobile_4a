@@ -20,6 +20,7 @@ import { AngularFireDatabase } from "@angular/fire/database";
 export class AddFilmPage {
   
   item: Item = {
+    key : null,
     name: "",
     description: "",
     year: null,
@@ -64,7 +65,12 @@ export class AddFilmPage {
   }
 
   addItem(item: Item) {
+    this.afDB.list("/film-list").valueChanges().subscribe(data => {
+      item.key = data.length;
+      console.log(item.key)
+    });
     this.afDB.list("/film-list").push(item);
-    console.log("Item", item + " push");
+    // this.afDB.object("/film-list/" + item.key).set(item);
+    // console.log("Item", item + " push");
   }
 }
