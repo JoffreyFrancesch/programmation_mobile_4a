@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home'; 
 import { DetailsPage } from '../pages/details/details'
+import { AddFilmPage } from '../pages/add-film/add-film'
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 
@@ -20,7 +21,7 @@ export const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [MyApp, HomePage, DetailsPage],
+  declarations: [MyApp, HomePage, DetailsPage, AddFilmPage],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -28,7 +29,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, HomePage, DetailsPage],
+  entryComponents: [MyApp, HomePage, DetailsPage, AddFilmPage],
   providers: [
     StatusBar,
     SplashScreen,

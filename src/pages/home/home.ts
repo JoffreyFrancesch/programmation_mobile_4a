@@ -9,6 +9,7 @@ import {
 } from "@angular/fire/database";
 
 import { DetailsPage } from "../../pages/details/details" 
+import { AddFilmPage } from "../../pages/add-film/add-film"
 
 @Component({
   selector: "page-home",
@@ -25,6 +26,12 @@ export class HomePage {
       .subscribe((data) => {
         this.items = data;
       });
+  }
+
+  addPage(){
+    this.navCtrl.push(AddFilmPage,{
+      list : this.items
+    });
   }
 
   itemSelected(item: Object) {

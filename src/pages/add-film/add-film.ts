@@ -10,7 +10,9 @@ import {
   Item
 } from "../../models/item/item.model";
 
-import { AngularFireDatabase } from "@angular/fire/database";
+import {
+  AngularFireDatabase
+} from "@angular/fire/database";
 
 @IonicPage()
 @Component({
@@ -18,15 +20,14 @@ import { AngularFireDatabase } from "@angular/fire/database";
   templateUrl: "add-film.html"
 })
 export class AddFilmPage {
-  
   item: Item = {
-    key : null,
+    key: null,
     name: "",
     description: "",
     year: null,
     type: "",
     producer: "",
-    src : ""
+    src: ""
   };
 
   types = [
@@ -56,9 +57,14 @@ export class AddFilmPage {
     }
   ];
 
-  
+  items: Array<Object>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public afDB: AngularFireDatabase
+  ) {
+    this.items = navParams.get("list");
   }
 
   ionViewDidLoad() {
@@ -66,22 +72,33 @@ export class AddFilmPage {
   }
 
   addItem(item: Item) {
-    if(item.src == ""){
-      switch(item.type){
-        case "action" : item.src = "../assets/imgs/action.png"; break;
-        case "drame": item.src = "../assets/imgs/drame.png"; break;
-        case "comedie": item.src = "../assets/imgs/comedie.png"; break;
-        case "romance": item.src = "../assets/imgs/romance.png"; break;
-        case "animation": item.src = "../assets/imgs/animation.png"; break;
-        case "fantastique": item.src = "../assets/imgs/fantastique.png"; break;
-        default : item.src = "../assets/imgs/default.png";
+    if (item.src == "") {
+      switch (item.type) {
+        case "action":
+          item.src = "../assets/imgs/action.png";
+          break;
+        case "drame":
+          item.src = "../assets/imgs/drame.png";
+          break;
+        case "comedie":
+          item.src = "../assets/imgs/comedie.png";
+          break;
+        case "romance":
+          item.src = "../assets/imgs/romance.png";
+          break;
+        case "animation":
+          item.src = "../assets/imgs/animation.png";
+          break;
+        case "fantastique":
+          item.src = "../assets/imgs/fantastique.png";
+          break;
+        default:
+          item.src = "../assets/imgs/default.png";
       }
     }
-    this.afDB.list("/film-list").valueChanges().subscribe(data => {
-      item.key = data.length;
-      // console.log(item.key)
-    });
-    this.afDB.list("/film-list").push(item);
+    item.key = this.items.length;
+    const toSend = this.afDB.object(`/film-list/${item.key}`);
+    toSend.set(item);
     this.navCtrl.pop();
   }
 }
