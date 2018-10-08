@@ -20,6 +20,7 @@ import {
   templateUrl: "add-film.html"
 })
 export class AddFilmPage {
+  //item to set into firebase
   item: Item = {
     key: null,
     name: "",
@@ -30,6 +31,7 @@ export class AddFilmPage {
     src: ""
   };
 
+  //type for movies
   types = [
     {
       value: "action",
@@ -57,21 +59,24 @@ export class AddFilmPage {
     }
   ];
 
-  items: Array<Object>;
+  //size of items in firebase
+  taille: number;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public afDB: AngularFireDatabase
   ) {
-    this.items = navParams.get("list");
+    this.taille = navParams.get("taille");
   }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad AddFilmPage");
   }
 
+  //add item to firebase
   addItem(item: Item) {
+    //setting image if url = ""
     if (item.src == "") {
       switch (item.type) {
         case "action":
@@ -96,9 +101,12 @@ export class AddFilmPage {
           item.src = "../assets/imgs/default.png";
       }
     }
-    item.key = this.items.length;
+    item.key = this.taille;
+    //setting custom key
     const toSend = this.afDB.object(`/film-list/${item.key}`);
+    //set item into firebase
     toSend.set(item);
+    //go back to home page
     this.navCtrl.pop();
   }
 }

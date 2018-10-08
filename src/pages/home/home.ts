@@ -17,9 +17,11 @@ import { AddFilmPage } from "../../pages/add-film/add-film"
 })
 
 export class HomePage {
+  //Array of all items in firebase
    items : Array<Object>;
 
   constructor(public navCtrl: NavController, afDB: AngularFireDatabase) {
+    //getting all items into firebase
     afDB
       .list("/film-list")
       .valueChanges()
@@ -28,12 +30,14 @@ export class HomePage {
       });
   }
 
+  //change page to addPage
   addPage(){
     this.navCtrl.push(AddFilmPage,{
-      list : this.items
+      taille : this.items.length
     });
   }
 
+  //change page to show more details
   itemSelected(item: Object) {
     this.navCtrl.push(DetailsPage, {
       data : item
