@@ -1,7 +1,7 @@
 language: node_js
 branches:
- only:
-  — gh-pages
+  only:
+  - master
 before_script:
   — npm install -g ionic cordova
 script:
