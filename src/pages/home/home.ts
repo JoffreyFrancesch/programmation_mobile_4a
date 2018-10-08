@@ -24,7 +24,6 @@ export class HomePage {
       .valueChanges()
       .subscribe((data) => {
         this.items = data;
-        console.log("items", this.items);
       });
   }
 
@@ -32,6 +31,5 @@ export class HomePage {
     this.navCtrl.push(DetailsPage, {
       data : item
     })
-    console.log("Selected Item", item);
   }
 }

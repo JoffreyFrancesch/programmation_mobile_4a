@@ -42,6 +42,11 @@
     <ion-datetime [(ngModel)]="item.year" displayFormat="YYYY"></ion-datetime>
   </ion-item>
 
+  <ion-item padding >
+    <ion-label floatin>Image source</ion-label>
+    <ion-input [(ngModel)]="item.src" text></ion-input>
+  </ion-item>
+
   <button ion-button outline block padding (click)="addItem(item)">Ajouter le film</button>
 
 

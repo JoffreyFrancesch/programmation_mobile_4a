@@ -25,7 +25,8 @@ export class AddFilmPage {
     description: "",
     year: null,
     type: "",
-    producer: ""
+    producer: "",
+    src : ""
   };
 
   types = [
@@ -65,12 +66,22 @@ export class AddFilmPage {
   }
 
   addItem(item: Item) {
+    if(item.src == ""){
+      switch(item.type){
+        case "action" : item.src = "../assets/imgs/action.png"; break;
+        case "drame": item.src = "../assets/imgs/drame.png"; break;
+        case "comedie": item.src = "../assets/imgs/comedie.png"; break;
+        case "romance": item.src = "../assets/imgs/romance.png"; break;
+        case "animation": item.src = "../assets/imgs/animation.png"; break;
+        case "fantastique": item.src = "../assets/imgs/fantastique.png"; break;
+        default : item.src = "../assets/imgs/default.png";
+      }
+    }
     this.afDB.list("/film-list").valueChanges().subscribe(data => {
       item.key = data.length;
-      console.log(item.key)
+      // console.log(item.key)
     });
     this.afDB.list("/film-list").push(item);
-    // this.afDB.object("/film-list/" + item.key).set(item);
-    // console.log("Item", item + " push");
+    this.navCtrl.pop();
   }
 }

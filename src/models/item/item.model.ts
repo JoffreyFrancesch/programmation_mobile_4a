@@ -5,4 +5,5 @@ export interface Item {
     year : number;
     type : string;
     producer : string;
+    src : string;
 }
