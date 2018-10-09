@@ -3,9 +3,9 @@ branches:
   only:
   - master
 before_script:
-  — npm install -g ionic cordova
+  — npm install -g ionic@latest cordova
 script:
-  — ionic cordova build browser — prod
+  — ionic cordova build android --minifycss --optimizejs --minifyjs --release
 deploy:
  provider: pages
  skip-cleanup: true
