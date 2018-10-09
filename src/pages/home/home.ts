@@ -32,9 +32,7 @@ export class HomePage {
 
   //change page to addPage
   addPage(){
-    this.navCtrl.push(AddFilmPage,{
-      taille : this.items.length
-    });
+    this.navCtrl.push(AddFilmPage);
   }
 
   //change page to show more details

@@ -9,10 +9,38 @@
 
 <ion-content padding>
   <img class="image" src={{item.src}}>
-  <H1>{{ item.name }}</H1>
-  <p>{{ item.description }}</p>
-  <p>{{ item.producer }}</p>
-  <p>{{ item.year }}</p>
-  <p>{{ item.type }}</p>
+  <ion-list>
+    <ion-item>
+      <H1>{{ item.name }}</H1>
+      <button ion-button clear item-end (click)="changeTitle()">
+        <ion-icon name="create" md="md-create"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item *ngIf=" item.description != ''">
+      <p>{{ item.description }}</p>
+      <button ion-button clear item-end (click)="changeDesc()">
+        <ion-icon name="create" md="md-create"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item *ngIf=" item.producer != ''">
+      <p>{{ item.producer }}</p>
+      <button ion-button clear item-end (click)="changeProducer()">
+        <ion-icon name="create" md="md-create"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item *ngIf=" item.year != null">
+      <p>{{ item.year }}</p>
+      <button ion-button clear item-end (click)="changeYear()">
+        <ion-icon name="create" md="md-create"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item *ngIf=" item.type != ''">
+      <p>{{ item.type }}</p>
+      <button ion-button clear item-end (click)="changeType()">
+        <ion-icon name="create" md="md-create"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+  <button *ngIf="item.title == '' || item.description == '' || item.producer == '' || item.year == null || item.type == ''"    ion-button outline block padding (click)="addField()">Ajouter un champs</button>
   <button ion-button outline block padding (click)="suppItem(item.key)">Supprimer le film</button>
 </ion-content>
