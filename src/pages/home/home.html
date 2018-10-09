@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Mes films
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="addPage()" ion-button>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-thumbnail item-start>
+        <img src={{item.src}}>
+      </ion-thumbnail>
+      <h2>{{item.name}}</h2>
+      <p>{{item.description}}</p>
+      <button ion-button clear item-end (click)="itemSelected(item)">Voir</button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<!-- <ion-content padding>
+  <ion-list>
+    <ion-item class="text" *ngFor="let item of items">
+      {{item.name}}
+    </ion-item>
+<button ion-button clear item-end [navPush]="DetailsPage" [navParams]=item (click)="itemSelected(item)">Voir</button>
+  </ion-list>
+</ion-content> -->
