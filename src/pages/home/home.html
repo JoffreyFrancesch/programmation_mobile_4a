@@ -15,12 +15,11 @@
 
   <ion-list>
     <ion-item *ngFor="let item of items">
-      <ion-thumbnail item-start>
-        <img src={{item.src}}>
-      </ion-thumbnail>
-      <h2>{{item.name}}</h2>
-      <p>{{item.description}}</p>
-      <button ion-button clear item-end (click)="itemSelected(item)">Voir</button>
+        <ion-thumbnail item-start>
+          <img src={{item.src}}>
+        </ion-thumbnail>
+        <h2 class="title-item">{{item.name}}</h2>
+        <button ion-button clear item-end color="secondary" (click)="itemSelected(item)">Voir</button>
     </ion-item>
   </ion-list>
 </ion-content>

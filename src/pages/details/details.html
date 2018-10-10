@@ -1,46 +1,78 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>details</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Détails : {{item.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="content-font" padding>
   <img class="image" src={{item.src}}>
-  <ion-list>
-    <ion-item>
-      <H1>{{ item.name }}</H1>
-      <button ion-button clear item-end (click)="changeTitle()">
-        <ion-icon name="create" md="md-create"></ion-icon>
-      </button>
-    </ion-item>
-    <ion-item *ngIf=" item.description != ''">
-      <p>{{ item.description }}</p>
-      <button ion-button clear item-end (click)="changeDesc()">
-        <ion-icon name="create" md="md-create"></ion-icon>
-      </button>
-    </ion-item>
-    <ion-item *ngIf=" item.producer != ''">
-      <p>{{ item.producer }}</p>
-      <button ion-button clear item-end (click)="changeProducer()">
-        <ion-icon name="create" md="md-create"></ion-icon>
-      </button>
-    </ion-item>
-    <ion-item *ngIf=" item.year != null">
-      <p>{{ item.year }}</p>
-      <button ion-button clear item-end (click)="changeYear()">
-        <ion-icon name="create" md="md-create"></ion-icon>
-      </button>
-    </ion-item>
-    <ion-item *ngIf=" item.type != ''">
-      <p>{{ item.type }}</p>
-      <button ion-button clear item-end (click)="changeType()">
-        <ion-icon name="create" md="md-create"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-list>
-  <button *ngIf="item.title == '' || item.description == '' || item.producer == '' || item.year == null || item.type == ''"    ion-button outline block padding (click)="addField()">Ajouter un champs</button>
+
+  <ion-grid>
+    <ion-row class="padding-first-row">
+      <ion-col col-auto>
+        <H1 class="title-details">{{ item.name }}</H1>
+      </ion-col>
+      <ion-col>
+        <button float-right ion-button clear item-end (click)="changeTitle()">
+          <ion-icon name="create" md="md-create"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-auto>
+        <p class="text-col">Description</p>
+      </ion-col>
+      <ion-col>
+        <button float-right ion-button clear item-end (click)="changeDesc()">
+          <ion-icon name="create" md="md-create"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p class="description">{{ item.description }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-auto>
+        <p class="text-col">Réal : {{ item.producer }}</p>
+      </ion-col>
+      <ion-col>
+        <button float-right ion-button clear item-end (click)="changeProducer()">
+          <ion-icon name="create" md="md-create"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-auto>
+        <p class="text-col">Sortie en : {{ item.year }}</p>
+      </ion-col>
+      <ion-col>
+        <button float-right ion-button clear item-end (click)="changeYear()">
+          <ion-icon name="create" md="md-create"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-auto>
+        <p class="text-col">Genre : {{ item.type }}</p>
+      </ion-col>
+      <ion-col>
+        <button float-right ion-button clear item-end (click)="changeType()">
+          <ion-icon name="create" md="md-create"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+  <button *ngIf="item.title == '' || item.description == '' || item.producer == '' || item.year == null || item.type == ''"
+    ion-button outline block padding (click)="addField()">Ajouter un champs</button>
   <button ion-button outline block padding (click)="suppItem(item.key)">Supprimer le film</button>
 </ion-content>
