@@ -29,8 +29,9 @@ Please make sure to install Ionic CLI command (you can find here https://ionicfr
 
 ### Todos
 
- - Continuous Integration with Travis CI (OK)
- - Implement Create operation (OK)
- - Implement Read opération (OK)
- - Implement Update operation (90%)
- - Implement Delete opération (OK)
+ - Continuous Integration with Travis CI (100% --> OK)
+ - Implement Create operation (100% -> OK)
+ - Implement Read opération (100% --> OK)
+ - Implement Update operation (100% --> OK)
+ - Implement Delete opération (100% --> OK)
+ - Add SCSS for the style of the app (100% --> OK)
