@@ -5,7 +5,8 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  AlertController
+  AlertController,
+  ActionSheetController
 } from "ionic-angular";
 
 import {
@@ -60,7 +61,8 @@ export class DetailsPage {
     public navParams: NavParams,
     public afDB: AngularFireDatabase,
     public alertCtrl: AlertController,
-    private datePicker: DatePicker
+    private datePicker: DatePicker,
+    public actionSheetCtrl: ActionSheetController
   ) {
     this.item = navParams.get("data");
   }
@@ -156,18 +158,18 @@ export class DetailsPage {
   }
 
   changeYear() {
-    //TODO : implement function to change year with an alert
-    this.datePicker.show({
-      date: new Date('YYYY'),
-      mode: 'date',
-      titleText : "Changer l'année",
-      okText : "Valider",
-      cancelText : "Annuler",
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_TRADITIONAL
-    }).then(
-      date => console.log('Got date: ', date),
-      err => console.log('Error occurred while getting date: ', err)
-    );
+    // //TODO : implement function to change year with an alert
+    // this.datePicker.show({
+    //   date: new Date('YYYY'),
+    //   mode: 'date',
+    //   titleText : "Changer l'année",
+    //   okText : "Valider",
+    //   cancelText : "Annuler",
+    //   androidTheme: this.datePicker.ANDROID_THEMES.THEME_TRADITIONAL
+    // }).then(
+    //   date => console.log('Got date: ', date),
+    //   err => console.log('Error occurred while getting date: ', err)
+    // );
   }
 
   changeType() {
@@ -196,7 +198,50 @@ export class DetailsPage {
   }
 
   addField() {
-    //TODO : implement function to add a field with an alert
+    const actionSheet = this.actionSheetCtrl.create({
+      title: 'Quel champs voullez vous ajouter ?'
+    });
+    if (this.item.name == "") {
+      actionSheet.addButton({
+        text: 'Titre',
+        handler: () => {
+          this.changeTitle();
+        }
+      });
+    }
+    if (this.item.description == "") {
+      actionSheet.addButton({
+        text: 'Description',
+        handler: () => {
+          this.changeDesc();
+        }
+      });
+    }
+    if (this.item.producer == "") {
+      actionSheet.addButton({
+        text: 'Réalisateur',
+        handler: () => {
+          this.changeProducer();
+        }
+      });
+    }
+    if (this.item.type == "") {
+      actionSheet.addButton({
+        text: 'Genre',
+        handler: () => {
+          this.changeType();
+        }
+      });
+    }
+    if (this.item.year == null) {
+      actionSheet.addButton({
+        text: 'Année',
+        handler: () => {
+          console.log('Not implemented yet');
+        }
+      });
+    }
+    actionSheet.present();
   }
 
   updateToFirebase(key: string) {
