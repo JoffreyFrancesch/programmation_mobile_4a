@@ -6,7 +6,8 @@ import {
   NavController,
   NavParams,
   AlertController,
-  ActionSheetController
+  ActionSheetController,
+  ToastController
 } from "ionic-angular";
 
 import {
@@ -16,10 +17,6 @@ import {
 import {
   Item
 } from "../../models/item/item.model"
-
-import {
-  DatePicker
-} from "@ionic-native/date-picker";
 
 @IonicPage()
 @Component({
@@ -61,8 +58,8 @@ export class DetailsPage {
     public navParams: NavParams,
     public afDB: AngularFireDatabase,
     public alertCtrl: AlertController,
-    private datePicker: DatePicker,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public toastCtrl : ToastController
   ) {
     this.item = navParams.get("data");
   }
@@ -74,7 +71,6 @@ export class DetailsPage {
   }
 
   changeTitle() {
-    //TODO : implement function to change title with an alert
     const alert = this.alertCtrl.create({
       title: "Changer le titre",
       message: "veuillez entrer le nouveau titre",
@@ -102,7 +98,6 @@ export class DetailsPage {
   }
 
   changeDesc() {
-    //TODO : implement function to change description with an alert
     const alert = this.alertCtrl.create({
       title: "Changer la description",
       message: "veuillez entrer la nouvelle description",
@@ -130,7 +125,6 @@ export class DetailsPage {
   }
 
   changeProducer() {
-    //TODO : implement function to change producer with an alert
     const alert = this.alertCtrl.create({
       title: "Changer le réalisateur",
       message: "veuillez entrer le nouveau réalisateur",
@@ -158,25 +152,47 @@ export class DetailsPage {
   }
 
   changeYear() {
-    // //TODO : implement function to change year with an alert
-    // this.datePicker.show({
-    //   date: new Date('YYYY'),
-    //   mode: 'date',
-    //   titleText : "Changer l'année",
-    //   okText : "Valider",
-    //   cancelText : "Annuler",
-    //   androidTheme: this.datePicker.ANDROID_THEMES.THEME_TRADITIONAL
-    // }).then(
-    //   date => console.log('Got date: ', date),
-    //   err => console.log('Error occurred while getting date: ', err)
-    // );
+    const alert = this.alertCtrl.create({
+      title: "Changer l'année",
+      message: "veuillez entrer la nouvelle année ",
+      inputs: [{
+        name: "annee",
+        placeholder: "Annee"
+      }],
+      buttons: [{
+        text: "Annuler",
+        handler: data => {
+          console.log("Cancel clicked");
+        }
+      },
+      {
+        text: "Enregistrer",
+        handler: data => {
+          if(Number(data.annee)){
+            console.log("OK", Number(data.annee))
+            this.item.year = Number(data.annee);
+            this.updateToFirebase(this.item.key);
+          } else {
+            console.log("No")
+            const toast = this.toastCtrl.create({
+              message:
+                "L'année doit uniquement contenir des chiffres",
+              duration: 3000,
+              position: "top"
+            });
+            toast.present();
+          }
+        }
+      }
+      ]
+    });
+    alert.present();
   }
 
   changeType() {
-    //TODO : implement function to change type with an alert
     const alert = this.alertCtrl.create();
-    alert.setTitle("Lightsaber color");
-
+    alert.setTitle("Changer le genre");
+    alert.setMessage("Veuillez selectioner le nouveau genre du film")
     this.types.forEach(element => {
       alert.addInput({
         type: "radio",

@@ -1,5 +1,30 @@
 page-details {
 
+  .padding-first-row {
+    padding-top: 15px;
+  }
+
+  .content-font {
+    font-family: 'Montserrat',
+      sans-serif;
+  }
+
+  .text-col {
+    font-size: auto;
+    font-weight: normal;
+  }
+
+  .description {
+    font-size: auto;
+    font-weight: lighter;
+    text-align: justify;
+  }
+
+  .title-details {
+    font-size: auto;
+    font-weight: bold;
+  }
+
   .image {
     height: auto;
     width: auto;
