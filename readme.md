@@ -29,7 +29,8 @@ Please make sure to install Ionic CLI command (you can find here https://ionicfr
 
 ### Todos
 
+ - Continuous Integration with Travis CI (OK)
  - Implement Create operation (OK)
  - Implement Read opération (OK)
- - Implement Update operation (0%)
- - Implement Delete opération (0%)
+ - Implement Update operation (90%)
+ - Implement Delete opération (OK)
